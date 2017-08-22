@@ -1,0 +1,19 @@
+#new-data {
+    height: 180px;
+    padding: 10px;
+    background: lightgrey;
+}
+
+#new-data .new-data-wrapper {
+    position: relative;
+    width: 100%;
+    height: 50%;
+}
+
+#new-data #new-data-givens {
+    height: calc(70% - 8.8px);
+}
+
+#new-data #new-data-need {
+    height: calc(30% - 8.8px);
+}

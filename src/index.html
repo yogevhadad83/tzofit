@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Tzofit</title>
+
+    <link href="style.css" rel="stylesheet">
+
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.16.0/math.min.js"></script>-->
+    <!--<script src="./lib/algebra-0.2.6.min.js"></script>-->
+</head>
+<body>
+<div id="data">
+    <div id="new-data">
+        <div id="new-data-givens">
+            <div class="new-data-wrapper">
+                <div class="right">
+                    <select onchange="TZOFIT.newDataOptionSelected(this.value)" id="new-data-select">
+                    </select>
+                </div>
+            </div>
+            <div id="new-data-template-wrapper" class="new-data-wrapper">
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="new-data-need">
+            <div class="right">
+                <span>
+                    <button onclick="TZOFIT.solve();">פתור</button>
+                </span>
+                <span class="single-input-box" data-index="0">
+                    <input onkeyup="TZOFIT.onEnterVertexName(this)" class="new-vertex-name" maxlength="1">
+                </span>
+                <span class="single-input-box" data-index="1">
+                    <input onkeyup="TZOFIT.onEnterVertexName(this)" onkeypress="TZOFIT.onSolveFill(event)"
+                           class="new-vertex-name" maxlength="1">
+                </span>
+                מצא את
+            </div>
+        </div>
+    </div>
+
+    <div id="given">
+        <div id="load-given">
+            <span><button id="save-button" onclick="TZOFIT.saveButtonClick(this)">שמור</button></span>
+            <span><button onclick="TZOFIT.loadButtonClick(1)">1</button></span>
+            <span><button onclick="TZOFIT.loadButtonClick(2)">2</button></span>
+            <span><button onclick="TZOFIT.loadButtonClick(3)">3</button></span>
+            <span><button onclick="TZOFIT.loadButtonClick(4)">4</button></span>
+            <span><button onclick="TZOFIT.loadButtonClick(5)">5</button></span>
+        </div>
+
+        <p>:נתון</p>
+        <div id="given-data">
+        </div>
+    </div>
+    <div id="sketch">
+        <div id="debug"></div>
+        <canvas id="canvas" width="700" height="500"></canvas>
+    </div>
+</div>
+<div id="solution">
+    <div id="output"></div>
+</div>
+<script src="bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+span.single-input-box .new-vertex-name,
+span.single-input-box .new-vertex-size,
+span.single-input-box .inner-vertex-name {
+    width: 20px;
+}
+
+span.single-input-box .new-equation {
+    width: 100px;
+}
+
+#data {
+    width: 60%;
+    padding: 3px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+#solution {
+    position: relative;
+    padding: 3px;
+    float: left;
+    width: 40%;
+    height: 900px;
+    box-sizing: border-box;
+    background: url("main/view/sketchbook.png");
+}
+
+#given {
+    padding: 10px;
+    height: 200px;
+}
+
+#given #load-given button.selected {
+    background-color: green;
+}
+
+#sketch {
+    padding: 10px;
+    height: 500px;
+}
+
+#sketch canvas {
+    border: solid;
+    cursor: none;
+}
+
+#output {
+    padding: 10px;
+}
