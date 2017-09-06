@@ -9,9 +9,11 @@ body {
 .right {
     float: right;
 }
+
 .hidden {
     display: none;
 }
+
 #loader {
     position: absolute;
     top: 200px;

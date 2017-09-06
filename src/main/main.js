@@ -65,7 +65,9 @@ window.TZOFIT = {};
     scope.solve = function () {
         let need = readNeed();
         Connector.onSolve(need);
+
         document.getElementById("loader").classList.remove("hidden");
+
         brain.solve(need).then(() => {
             document.getElementById("loader").classList.add("hidden");
             view.writeSolution()

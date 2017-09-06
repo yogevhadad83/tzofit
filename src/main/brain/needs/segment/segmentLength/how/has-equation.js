@@ -43,7 +43,6 @@ class HasEquations extends BaseHow {
                 break;
             }
             default: {
-
                 //TODO: extract to function
                 expression = equations[0].solveFor(segmentName);
                 sizeResult = evaluateExpression(expression);

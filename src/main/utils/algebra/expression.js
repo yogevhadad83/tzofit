@@ -132,6 +132,7 @@ class Expression {
                 return false;
             }
         }
+
         return true;
     }
 

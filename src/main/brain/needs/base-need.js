@@ -26,6 +26,7 @@ class BaseNeed {
             }
             return ret;
         })();
+
         function getOld() {
             console.warn(offset, "need > old >", this.name, subject);
             return oldNeed.getResult() || Result.FAILED_RESULT;
@@ -64,12 +65,14 @@ class BaseNeed {
         NeedsLogger.addNeed(need);
             result = getNew.call(this);
 
+            //NOTE: We do need to add the need to the NeedsLogger beforehand, since we want child needs to know it's still running
             if (result.isFailed()) {
                 NeedsLogger.removeNeed(this.name, subject);
             } else {
         need.setResult(result);
             }
         }
+
         console.warn(offset, "need > ", this.name, subject, "result > ", result.getValue());
 
         let eventData = result.isFailed() ? {
