@@ -13,7 +13,7 @@ class HasEquations extends BaseHow {
     }
 
     //Currently only supporting 2 equations with 2 parameters
-    getResult(segmentName) {
+    getResult(segmentName, offsetSize) {
         let expression;
         let sizeResult;
         let sizes;
@@ -26,9 +26,9 @@ class HasEquations extends BaseHow {
             if (!/[A-Z][A-Z]/g.test(expression)) { //The expression is a number
                 return new Result(parseFloat(expression));
             } else if (/^[A-Z][A-Z]$/g.test(expression)) { //The expression is a segment's name (i.e AB)
-                return GetSegmentLength.getIt(expression);
+                return GetSegmentLength.getIt(expression, offsetSize);
             } else { //The expression is an expression (i.e AB + BD)
-                return EvaluateSegmentsExpession.getIt(expression);
+                return EvaluateSegmentsExpession.getIt(expression, offsetSize);
             }
         }
 

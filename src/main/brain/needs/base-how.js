@@ -8,8 +8,8 @@ class BaseHow {
         this.justificationTemplate = new Template(justificationTemplateStr);
     }
 
-    execute(subject, step) {
-        return this.getResult(subject, step) || Result.FAILED_RESULT;
+    execute(subject, offsetSize) {
+        return this.getResult(subject, offsetSize) || Result.FAILED_RESULT;
     }
 
     //@overidden

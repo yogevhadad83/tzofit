@@ -18,7 +18,7 @@ class Equation {
 
         solution[v1] = v1Solution;
 
-        if (eq1.expression.getScalar(v1)) {
+        if (eq1.expression.getScalar(v1) == 0) {
             v2Solution = null;
         } else {
             eqExpScaled = eq1.expression.scale(eq2.expression.getScalar(v1) / eq1.expression.getScalar(v1));

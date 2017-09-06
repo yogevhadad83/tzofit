@@ -9,14 +9,14 @@ class KnownSegmentsConsistOfit extends BaseHow {
         this.index = 2;
     }
 
-    getResult(segmentName) {
+    getResult(segmentName, offsetSize) {
         let sizeResult;
         let consistingObject;
 
         consistingObject = Connector.getContainingSegments(segmentName);
         //Found subsegments
         for (let i = 0; i < consistingObject.length; i++) {
-            sizeResult = EvaluateSegmentsExpession.getIt(consistingObject[i].contain.name + " - " + consistingObject[i].sub.name);
+            sizeResult = EvaluateSegmentsExpession.getIt(consistingObject[i].contain.name + " - " + consistingObject[i].sub.name, offsetSize);
             //TODO: Use the template
             Connector.addEquation(segmentName + " = " + consistingObject[i].contain.name + " - " + consistingObject[i].sub.name);
             if (!sizeResult.isFailed()) {

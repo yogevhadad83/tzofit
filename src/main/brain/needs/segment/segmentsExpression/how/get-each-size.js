@@ -12,7 +12,7 @@ class GetEachSize extends BaseHow {
         this.index = 1;
     }
 
-    getResult(expressionString) {
+    getResult(expressionString, offsetSize) {
         let sizeResult;
         let segments = Algebra.Expression.parse(expressionString).getVariables();
         let evaluatedSegments = {};
@@ -25,7 +25,7 @@ class GetEachSize extends BaseHow {
 
         for (let i=0; i < segments.length; i++) {
             if (segments[i]) {
-                sizeResult = GetSegmentLength.getIt(segments[i]);
+                sizeResult = GetSegmentLength.getIt(segments[i], offsetSize);
                 if (sizeResult.isFailed()) {
                     return;
                 }

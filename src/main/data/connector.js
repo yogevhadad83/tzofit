@@ -142,7 +142,7 @@ class Connector {
         let data;
 
         for (let i=0; i < this.equations.length; i++) {
-            equationsStrings.push(this.equations.toString());
+            equationsStrings.push(this.equations[i].toString());
         }
 
         data = {

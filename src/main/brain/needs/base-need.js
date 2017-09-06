@@ -14,21 +14,21 @@ class BaseNeed {
         this.howDoIgetIt.register(how, after);
     }
 
-    getIt(subject) {
+    getIt(subject, offsetSize) {
         let result;
         let need = new Need(this.name, subject);
         let oldNeed = NeedsLogger.getNeed(this.name, subject);
 
-        function getOld(oldNeed) {
-            let result;
-            if (oldNeed.isRunning()) {
-                result = Result.FAILED_RESULT;
-                console.warn("need > old(running) >", this.name, subject);
-            } else {
-                result = oldNeed.getResult();
-                console.warn("need > old >", this.name, subject);
+        let offset = (() => {
+            let ret = "";
+            for (let i=0; i < offsetSize; i++) {
+                ret += " ";
             }
-            return result;
+            return ret;
+        })();
+        function getOld() {
+            console.warn(offset, "need > old >", this.name, subject);
+            return oldNeed.getResult() || Result.FAILED_RESULT;
         }
 
         function getNew() {
@@ -36,16 +36,13 @@ class BaseNeed {
             let hows = this.howDoIgetIt.getHows();
 
 
-            if (this.name == "evaluateSegmentsExpession" && subject.indexOf("AD - 2") == 0) {
-                debugger;
-            }
-            console.warn("need > new >", this.name, subject);
+            console.warn(offset, "need > new > ", this.name, subject);
 
             for (let i = 0; i < hows.length; i++) {
 
-                console.warn("   how > ", hows[i].name, subject);
-                result = hows[i].execute(subject);
-                console.warn("   how > ", hows[i].name, subject, "result > ", result.getValue());
+                console.warn(offset, " _ how > ", hows[i].name, subject);
+                result = hows[i].execute(subject, offsetSize + 5);
+                console.warn(offset, "|_ how > ", hows[i].name, subject, "result > ", result.getValue());
 
                 if (result.isFailed()) {
                     continue;
@@ -60,20 +57,28 @@ class BaseNeed {
 
         document.dispatchEvent(new Event("needStart"));
 
-        //It's important to update the logger only AFTER we tried to look for an older call of this type
+        //NeedsLogger.printAll();
+        if (oldNeed) {
+            result = getOld.call(this);
+        } else {
         NeedsLogger.addNeed(need);
+            result = getNew.call(this);
 
-        result = oldNeed ? getOld.call(this, oldNeed) : getNew.call(this);
+            if (result.isFailed()) {
+                NeedsLogger.removeNeed(this.name, subject);
+            } else {
         need.setResult(result);
-        console.warn("need > ", this.name, subject, "result > ", result.getValue());
+            }
+        }
+        console.warn(offset, "need > ", this.name, subject, "result > ", result.getValue());
 
-        let eventData = need.isDone() ? {
+        let eventData = result.isFailed() ? {
+            status: "FAIL"
+        } : {
             status: "SUCCESS",
             whatDidINeed: this.parseNeed(subject),
             solution: this.parseSolution(subject, result),
             justification: result.getJustification()
-        } : {
-            status: "FAIL"
         };
 
         document.dispatchEvent( new CustomEvent("needEnd", {detail: eventData}) );

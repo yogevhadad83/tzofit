@@ -10,13 +10,13 @@ class ConsistOfKnownSegments extends BaseHow {
         this.index = 1;
     }
 
-    getResult(segmentName) {
+    getResult(segmentName, offsetSize) {
         let sizeResult;
         let segments;
 
         segments = Connector.getSubsegments(segmentName);
         if (0 < segments.length) {
-            sizeResult = EvaluateSegmentsExpession.getIt(segments[0].name + " + " + segments[1].name);
+            sizeResult = EvaluateSegmentsExpession.getIt(segments[0].name + " + " + segments[1].name, offsetSize);
             //TODO: Use the template
             Connector.addEquation(segmentName + " = " + segments[0].name + " + " + segments[1].name);
             if (!sizeResult.isFailed()) {

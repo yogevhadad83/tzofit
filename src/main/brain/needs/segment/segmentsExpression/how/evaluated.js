@@ -10,7 +10,7 @@ class Evaluated extends BaseHow {
         this.index = 0;
     }
 
-    getResult(expression) {
+    getResult(expression, offsetSize) {
         let evaluation, evaluationResult;
 
         for (let i=0; i < Connector.equations.length; i++) {
@@ -24,9 +24,9 @@ class Evaluated extends BaseHow {
             if (!/[A-Z][A-Z]/g.test(evaluation)) { //The evaluation is a number
                 evaluationResult = new Result(parseFloat(evaluation));
             } else if (/^[A-Z][A-Z]$/g.test(evaluation)) { //The evaluation is a segment's name (i.e AB)
-                evaluationResult = GetSegmentLength.getIt(evaluation);
+                evaluationResult = GetSegmentLength.getIt(evaluation, offsetSize);
             } else { //The evaluation is an expression (i.e AB + BD)
-                evaluationResult = EvaluateSegmentsExpession.getIt(evaluation);
+                evaluationResult = EvaluateSegmentsExpession.getIt(evaluation, offsetSize);
             }
             // if (sizeResult.isExpression()) {
             //     evaluationResult = EvaluateSegmentsExpession.getIt(sizeResult.getValue());
